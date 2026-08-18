@@ -1,0 +1,171 @@
+/* Pulsar Media — Color tokens
+   Rebuilt LIGHT-FIRST from the brand book "Pulsar — Marca e Tom de Voz"
+   (Nemo Sampaio). The brand breathes: white/paper is the default surface
+   ("respiro" is identity), navy is the ink, and Pulsar-green is the
+   signature that sings sparingly. Saturated color blocks (royal, periwinkle,
+   teal, yellow, violet, amber) are the brand's expressive register — used
+   full-bleed as panels, never as body text.
+   Rule of thumb: one dominant surface per piece + max 1–2 accents. */
+
+:root {
+  /* ---- Brand core ---- */
+  --pulsar-green:  #51F28A; /* SIGNATURE — symbol, keylines, highlight moments */
+  --pulsar-navy:   #0C2E63; /* royal navy — wordmark & primary ink */
+  --pulsar-petrol: #0C1C2C; /* deepest near-black petrol — hero/darkest blocks */
+  --pulsar-white:  #FFFFFF;
+  --pulsar-paper:  #F5F8FB; /* cool off-white — the quiet second surface */
+
+  /* ---- Color-block palette (poster register) ---- */
+  --pulsar-royal:      #1618AB; /* deep royal blue block */
+  --pulsar-blue:       #2E33E0; /* electric blue */
+  --pulsar-periwinkle: #7184FC; /* cornflower / lilac */
+  --pulsar-cyan:       #22C9E0; /* teal-cyan — data, tech detail */
+  --pulsar-violet:     #5B22E0; /* violet block */
+  --pulsar-purple:     #7B2FF2; /* punctual purple */
+  --pulsar-yellow:     #FFD52E; /* high-contrast warm accent over blue/navy */
+  --pulsar-amber:      #FF9A00; /* warm accent — energetic block */
+  --pulsar-orange:     #FF6B01; /* deeper warm accent */
+
+  /* ---- Neutrals (light-first ramp) ---- */
+  --pulsar-ink:      #0C2452; /* primary text — royal navy ink */
+  --pulsar-slate-700:#33455E; /* body text */
+  --pulsar-slate-500:#5E6D82; /* muted text */
+  --pulsar-slate-400:#8C99AA; /* faint text, captions */
+  --pulsar-slate-200:#D3DCE6; /* strong hairline */
+  --pulsar-slate-100:#E4EAF1; /* soft hairline */
+  --pulsar-mist:     #EDF2F7; /* subtle chip / input fill */
+
+  /* ---- Deep-surface ramp (for inverted / dark blocks) ---- */
+  --pulsar-navy-900: #08172B; /* deepest recessed on dark */
+  --pulsar-navy-800: #0C2244; /* raised surface on dark */
+  --pulsar-navy-700: #13315C; /* chips / inputs on dark */
+  --pulsar-ink-100:  #EAF0F6; /* near-white text on dark */
+  --pulsar-ink-300:  #A9BACB; /* muted text on dark */
+  --pulsar-line-dark:#22405F; /* hairline on dark */
+
+  /* ---- Semantic aliases — LIGHT (default) ---- */
+  --bg-page:        var(--pulsar-white);
+  --bg-page-alt:    var(--pulsar-paper);
+  --surface-card:   var(--pulsar-white);
+  --surface-raised: var(--pulsar-white);
+  --surface-sunken: var(--pulsar-paper);
+  --border-subtle:  var(--pulsar-slate-100);
+  --border-strong:  var(--pulsar-slate-200);
+  --text-strong:    var(--pulsar-ink);
+  --text-body:      var(--pulsar-slate-700);
+  --text-muted:     var(--pulsar-slate-500);
+  --text-faint:     var(--pulsar-slate-400);
+
+  --accent:         var(--pulsar-green);   /* signature graphic accent (fills/keylines) */
+  --accent-ink:     var(--pulsar-navy);     /* text/icon placed ON green */
+  --primary:        var(--pulsar-navy);     /* institutional primary (buttons) */
+  --primary-ink:    var(--pulsar-white);    /* text ON navy */
+  --link:           var(--pulsar-blue);     /* interactive text on light — AA on white */
+  --link-hover:     var(--pulsar-royal);
+  --focus-ring:     var(--pulsar-green);
+
+  /* ---- Status ---- */
+  --status-success: #1FA765; /* AA-safe green for text/icons on light */
+  --status-info:    var(--pulsar-blue);
+  --status-warning: var(--pulsar-amber);
+  --status-danger:  var(--pulsar-orange);
+
+  /* ---- Signature glow (the one hero moment) ---- */
+  --glow-green: 0 0 0 1px rgba(81,242,138,.5), 0 12px 40px -12px rgba(81,242,138,.55);
+}
+
+/* ---- Inverted scope: dark navy blocks (hero moments, dividers, footers).
+   Set on any container to flip surfaces + text to the dark register. ---- */
+.pulsar-invert {
+  --bg-page:        var(--pulsar-petrol);
+  --bg-page-alt:    var(--pulsar-navy-900);
+  --surface-card:   var(--pulsar-navy-800);
+  --surface-raised: #123059;
+  --surface-sunken: var(--pulsar-navy-900);
+  --border-subtle:  var(--pulsar-line-dark);
+  --border-strong:  #2E4E70;
+  --text-strong:    var(--pulsar-white);
+  --text-body:      var(--pulsar-ink-100);
+  --text-muted:     var(--pulsar-ink-300);
+  --text-faint:     #7C8CA0;
+  --accent:         var(--pulsar-green);
+  --accent-ink:     var(--pulsar-petrol);
+  --primary:        var(--pulsar-green);   /* on dark, the signature becomes the CTA */
+  --primary-ink:    var(--pulsar-petrol);
+  --link:           var(--pulsar-cyan);
+  --link-hover:     #6ED8EA;
+  color: var(--text-body);
+  background: var(--bg-page);
+}
+
+/* ---- Royal-blue scope: the recurring saturated brand block ---- */
+.pulsar-royal-block {
+  --bg-page: var(--pulsar-royal);
+  --surface-card: #1C1EC0;
+  --border-subtle: rgba(255,255,255,.16);
+  --text-strong: var(--pulsar-white);
+  --text-body: rgba(255,255,255,.88);
+  --text-muted: rgba(255,255,255,.66);
+  --accent: var(--pulsar-yellow);
+  --accent-ink: var(--pulsar-navy);
+  --link: var(--pulsar-green);
+  color: var(--text-body);
+  background: var(--bg-page);
+}
+
+/* ---- Periwinkle scope: light color block — navy ink, white highlight ---- */
+.pulsar-periwinkle-block {
+  --bg-page: var(--pulsar-periwinkle);
+  --surface-card: #8391FC;
+  --border-subtle: rgba(12,36,82,.18);
+  --border-strong: rgba(12,36,82,.32);
+  --text-strong: var(--pulsar-navy);
+  --text-body: rgba(12,36,82,.9);
+  --text-muted: rgba(12,36,82,.66);
+  --text-faint: rgba(12,36,82,.5);
+  --accent: var(--pulsar-white);
+  --accent-ink: var(--pulsar-navy);
+  --primary: var(--pulsar-navy);
+  --primary-ink: var(--pulsar-white);
+  --link: var(--pulsar-navy);
+  color: var(--text-body);
+  background: var(--bg-page);
+}
+
+/* ---- Violet scope: deep color block — white text, green signature ---- */
+.pulsar-violet-block {
+  --bg-page: var(--pulsar-violet);
+  --surface-card: #6A32E8;
+  --border-subtle: rgba(255,255,255,.16);
+  --border-strong: rgba(255,255,255,.3);
+  --text-strong: var(--pulsar-white);
+  --text-body: rgba(255,255,255,.9);
+  --text-muted: rgba(255,255,255,.7);
+  --text-faint: rgba(255,255,255,.55);
+  --accent: var(--pulsar-green);
+  --accent-ink: var(--pulsar-petrol);
+  --primary: var(--pulsar-green);
+  --primary-ink: var(--pulsar-petrol);
+  --link: var(--pulsar-green);
+  color: var(--text-body);
+  background: var(--bg-page);
+}
+
+/* ---- Teal scope: bright cyan block — navy ink, navy primary ---- */
+.pulsar-teal-block {
+  --bg-page: var(--pulsar-cyan);
+  --surface-card: #3AD2E6;
+  --border-subtle: rgba(12,36,82,.16);
+  --border-strong: rgba(12,36,82,.3);
+  --text-strong: var(--pulsar-navy);
+  --text-body: rgba(12,36,82,.9);
+  --text-muted: rgba(12,36,82,.64);
+  --text-faint: rgba(12,36,82,.48);
+  --accent: var(--pulsar-navy);
+  --accent-ink: var(--pulsar-white);
+  --primary: var(--pulsar-navy);
+  --primary-ink: var(--pulsar-white);
+  --link: var(--pulsar-navy);
+  color: var(--text-body);
+  background: var(--bg-page);
+}

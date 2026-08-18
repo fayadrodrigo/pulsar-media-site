@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+
+# Editores
+.vscode/
+.idea/
+
+# Netlify (pasta local criada pelo CLI, se um dia usar)
+.netlify/

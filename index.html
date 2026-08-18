@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <title>Pulsar Media — Inteligência. Mídia. Presença.</title>
+  <meta name="description" content="A Pulsar Media é uma casa de representação comercial de mídia: conectamos marcas, agências, instituições e veículos com inteligência estratégica e visão ampla.">
+  <link rel="icon" type="image/svg+xml" href="assets/pulsar-symbol-green.svg">
+  <meta name="theme-color" content="#0C1C2C">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="Pulsar Media">
+  <meta property="og:title" content="Pulsar Media — Inteligência. Mídia. Presença.">
+  <meta property="og:description" content="Representação comercial de mídia. Conectamos marcas, agências, instituições e veículos com inteligência estratégica e visão ampla.">
+  <meta property="og:image" content="https://pulsarmedia.com.br/assets/og-pulsar.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Pulsar Media — Inteligência. Mídia. Presença.">
+  <meta name="twitter:description" content="Representação comercial de mídia. Conectamos marcas, agências, instituições e veículos com inteligência estratégica e visão ampla.">
+  <meta name="twitter:image" content="https://pulsarmedia.com.br/assets/og-pulsar.png">
+  <link rel="canonical" href="https://pulsarmedia.com.br/">
+  <meta property="og:url" content="https://pulsarmedia.com.br/">
+  <link rel="preconnect" href="https://unpkg.com">
+  <script src="https://unpkg.com/lucide@1.32.0/dist/umd/lucide.min.js" integrity="sha384-tiWC3xExiSLdtFfMgETUmXUaC8RevUW8QlVQIH7p2XzwWAeYgnGiqSKD3KOLS7qk" crossorigin="anonymous"></script>
+  <script src="./ds-base.js"></script>
+  <script>
+  /* Cor de assinatura por visita — signature pairings sobre petrol do design system.
+     Roda antes do conteúdo pintar e corrige os símbolos conforme entram no DOM,
+     para não haver troca visível de cor. */
+  (function () {
+    var MARKS = {
+      verde: { token: "var(--pulsar-green-base)", file: "pulsar-symbol-green.svg" },
+      cyan: { token: "var(--pulsar-cyan)", file: "pulsar-symbol-cyan.svg" },
+      amarelo: { token: "var(--pulsar-yellow)", file: "pulsar-symbol-yellow.svg" },
+      ambar: { token: "var(--pulsar-amber)", file: "pulsar-symbol-amber.svg" }
+    };
+    var names = Object.keys(MARKS);
+    var current = names[Math.floor(Math.random() * names.length)];
+
+    function fixImg(img) {
+      var src = img.getAttribute("src") || "";
+      if (src.indexOf("pulsar-symbol-") < 0) return;
+      var next = src.replace(/pulsar-symbol-[a-z]+\.svg/, MARKS[current].file);
+      if (next !== src) img.setAttribute("src", next);
+    }
+    function sweep(root) {
+      if (!root || root.nodeType !== 1) return;
+      if (root.tagName === "IMG") fixImg(root);
+      var list = root.querySelectorAll ? root.querySelectorAll('img[src*="pulsar-symbol-"]') : [];
+      for (var i = 0; i < list.length; i++) fixImg(list[i]);
+    }
+    function apply(name) {
+      if (!MARKS[name]) return;
+      current = name;
+      document.documentElement.style.setProperty("--pulsar-green", MARKS[name].token);
+      sweep(document.documentElement);
+      var icon = document.querySelector('link[rel="icon"]');
+      if (icon) icon.setAttribute("href", "assets/" + MARKS[name].file);
+    }
+    new MutationObserver(function (recs) {
+      for (var i = 0; i < recs.length; i++) {
+        for (var j = 0; j < recs[i].addedNodes.length; j++) sweep(recs[i].addedNodes[j]);
+      }
+    }).observe(document.documentElement, { childList: true, subtree: true });
+
+    window.PulsarAccent = { names: names, apply: apply, get current() { return current; } };
+    apply(current);
+  })();
+  </script>
+  <style>
+    /* Guarda o verde original: --pulsar-green é sobrescrito pela cor de assinatura sorteada. */
+    :root { --pulsar-green-base: #51F28A; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: #0C1C2C; }
+    a { color: var(--pulsar-green); text-decoration: none; }
+    a:hover { filter: brightness(1.18); }
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+      outline: 3px solid var(--pulsar-green); outline-offset: 3px; border-radius: 4px;
+    }
+    @keyframes pulsarRise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+    /* Ajustes que só existem por viewport (não expressáveis inline). */
+    @media (max-width: 820px) {
+      /* O símbolo sai de trás do texto e vira um canto inferior direito. */
+      [data-hero-mark] { top: auto !important; bottom: -6% !important; right: -24vw !important; transform: none !important; height: 52vw !important; opacity: .28 !important; }
+      /* Sem a régua vertical, tudo alinha na mesma margem esquerda. */
+      [data-rule-left] { border-left: 0 !important; padding-left: 0 !important; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+        transition-duration: .01ms !important;
+      }
+    }
+  </style>
+</helmet>
+
+<div class="pulsar-invert" style="background: var(--pulsar-petrol); min-height: 100vh; font-family: var(--font-body); color: var(--text-body)">
+
+  <header style="position: sticky; top: 0; z-index: 40; background: rgba(12,28,44,.82); backdrop-filter: blur(14px); border-bottom: 1px solid var(--pulsar-line-dark)">
+    <div style="max-width: 1180px; margin: 0 auto; padding: clamp(12px, 3vw, 16px) clamp(20px, 4vw, 44px); display: flex; align-items: center; flex-wrap: wrap; column-gap: clamp(16px, 3vw, 40px); row-gap: 10px">
+      <a href="#topo" style="display: inline-flex">
+        <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Logo" variant="lockup" color="{{ markColor }}" wordmark-color="white" symbol-src="assets" height="{{ 24 }}" hint-size="150px,24px"></x-import>
+      </a>
+      <a href="#contato" style="display: inline-flex; margin-left: auto">
+        <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Button" variant="signature" size="sm" hint-size="150px,34px">Entre em contato</x-import>
+      </a>
+    </div>
+  </header>
+
+  <section id="topo" style="position: relative; overflow: hidden; background: var(--pulsar-petrol); border-bottom: 1px solid var(--pulsar-line-dark)">
+    <div style="position: absolute; inset: 0; background-image: url(assets/imagery/fibre-optic.jpg); background-size: cover; background-position: center; opacity: .42"></div>
+    <sc-if value="{{ heroAltImage }}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; inset: 0; background-image: linear-gradient(rgba(12,28,44,.58), rgba(12,28,44,.58)), {{ heroAltImage }}; background-size: cover; background-position: center"></div>
+    </sc-if>
+    <div style="position: absolute; inset: 0; background: linear-gradient(96deg, #0C1C2C 30%, rgba(12,28,44,.86) 58%, rgba(12,28,44,.38) 100%)"></div>
+    <div data-hero-mark="" style="position: absolute; right: clamp(-90px, -6vw, -28px); top: 50%; transform: translateY(-50%); height: clamp(240px, 44vw, 560px); aspect-ratio: 240 / 290; background-image: {{ markBg }}; background-repeat: no-repeat; background-size: contain; background-position: center; opacity: .8; pointer-events: none"></div>
+    <div style="position: relative; max-width: 1180px; margin: 0 auto; padding: clamp(92px, 13vw, 148px) clamp(20px, 4vw, 44px) clamp(64px, 9vw, 96px); animation: pulsarRise 520ms var(--ease-standard) both">
+      <div style="display: flex; align-items: center; gap: 16px; margin-bottom: 34px">
+        <span style="width: 44px; height: 3px; background: var(--pulsar-green)"></span>
+        <span style="font-size: 12px; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--pulsar-green)">Representação comercial de mídia</span>
+      </div>
+      <h1 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(38px, 7.4vw, 96px); line-height: 1.02; letter-spacing: -.025em; text-transform: uppercase; margin: 0; color: var(--pulsar-white); max-width: 680px; text-wrap: pretty">Inteligência.<br>Mídia.<br><span style="color: var(--pulsar-green)">Presença.</span></h1>
+      <p style="font-size: 20px; line-height: 1.6; color: var(--text-body); max-width: 560px; margin: 34px 0 0">Transformamos comunicação em presença. Conectamos marcas, agências e veículos com inteligência estratégica e visão ampla.</p>
+      <div style="display: flex; align-items: center; gap: 28px; margin-top: 44px; flex-wrap: wrap">
+        <a href="#contato" style="display: inline-flex">
+          <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Button" variant="signature" size="lg" hint-size="220px,52px">Entre em contato</x-import>
+        </a>
+        <a href="#veiculos" style="font-size: 15px; font-weight: 500; color: var(--text-muted); border-bottom: 1px solid var(--pulsar-line-dark); padding-bottom: 3px" style-hover="color: var(--pulsar-green); border-color: var(--pulsar-green)">Veículos que representamos</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="quem-somos" style="background: var(--pulsar-navy-900); border-bottom: 1px solid var(--pulsar-line-dark)">
+    <div style="max-width: 1180px; margin: 0 auto; padding: clamp(68px, 9vw, 112px) clamp(20px, 4vw, 44px)">
+      <div style="display: flex; flex-wrap: wrap; gap: clamp(32px, 5vw, 72px); align-items: start">
+        <div data-rule-left="" style="flex: 1 1 300px; border-left: 1px solid var(--pulsar-line-dark); padding-left: 28px">
+          <div style="font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--pulsar-green); margin-bottom: 18px">Quem somos</div>
+          <h2 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 3.6vw, 46px); line-height: 1.06; letter-spacing: -.02em; text-transform: uppercase; margin: 0; color: var(--pulsar-white)">Presença que transforma mídia em valor</h2>
+        </div>
+        <div style="flex: 1 1 400px; display: flex; flex-direction: column; gap: 22px">
+          <p style="font-size: 19px; line-height: 1.65; color: var(--text-body); margin: 0">A Pulsar representa e conecta veículos relevantes de mídia do país, do digital à mídia exterior. Atuamos como elo estratégico entre comunicação, mídia e instituições — orientados por resultados, clareza e responsabilidade.</p>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(258px, 1fr)); gap: clamp(28px, 4vw, 52px); margin-top: clamp(48px, 6vw, 72px)">
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="width: 40px; height: 3px; background: var(--pulsar-green)"></span>
+          <h3 style="font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -.01em; margin: 0; color: var(--pulsar-white)">Inteligência estratégica</h3>
+          <p style="font-size: 16px; line-height: 1.6; color: var(--text-muted); margin: 0">Leitura de mercado e de audiência para decisões melhores.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="width: 40px; height: 3px; background: var(--pulsar-green)"></span>
+          <h3 style="font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -.01em; margin: 0; color: var(--pulsar-white)">Portfólio amplo</h3>
+          <p style="font-size: 16px; line-height: 1.6; color: var(--text-muted); margin: 0">Mídia digital, programática, CTV, OOH, DOOH e influência.</p>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 14px">
+          <span style="width: 40px; height: 3px; background: var(--pulsar-green)"></span>
+          <h3 style="font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -.01em; margin: 0; color: var(--pulsar-white)">Curadoria</h3>
+          <p style="font-size: 16px; line-height: 1.6; color: var(--text-muted); margin: 0">Representamos veículos por relevância e resultado.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--pulsar-petrol); border-top: 1px solid var(--pulsar-line-dark)">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 44px) clamp(56px, 8vw, 88px)">
+      <div style="position: relative; border-radius: 14px; overflow: hidden; aspect-ratio: 16 / 9; background: var(--pulsar-navy-800)">
+        <video ref="{{ videoRef }}" src="assets/quem-somos.mp4" muted="{{ soundOff }}" loop="{{ true }}" playsInline="{{ true }}" preload="metadata" style="width: 100%; height: 100%; object-fit: cover; filter: saturate(.85) brightness(.92)"></video>
+        <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,28,44,.12), rgba(12,28,44,.4)); pointer-events: none"></div>
+        <button type="button" onClick="{{ toggleSound }}" aria-label="{{ soundLabel }}" style="position: absolute; bottom: 16px; right: 16px; display: inline-flex; align-items: center; gap: 9px; height: 44px; padding: 0 18px; border: 1px solid rgba(255,255,255,.22); border-radius: 999px; background: rgba(12,28,44,.62); backdrop-filter: blur(8px); color: var(--pulsar-white); font-family: var(--font-body); font-size: 13px; font-weight: 500; letter-spacing: .04em; cursor: pointer" style-hover="border-color: var(--pulsar-green); color: var(--pulsar-green)">
+          <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Icon" name="{{ soundIcon }}" size="{{ 17 }}" color="currentColor" hint-size="17px,17px"></x-import>
+          {{ soundLabel }}
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="veiculos" style="background: var(--pulsar-petrol); border-top: 1px solid var(--pulsar-line-dark)">
+    <div style="max-width: 1180px; margin: 0 auto; padding: clamp(68px, 9vw, 112px) clamp(20px, 4vw, 44px)">
+      <div style="max-width: 720px; margin-bottom: 64px">
+        <div style="font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--pulsar-green); margin-bottom: 18px">Portfólio</div>
+        <h2 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(32px, 3.6vw, 46px); line-height: 1.06; letter-spacing: -.02em; text-transform: uppercase; margin: 0; color: var(--pulsar-white)">Veículos que representamos</h2>
+        <p style="font-size: 18px; line-height: 1.65; color: var(--text-muted); margin: 20px 0 0">Um portfólio completo para conectar marcas ao público certo, no momento certo.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; gap: 44px">
+        <div>
+          <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 12px 16px; margin-bottom: 24px">
+            <span style="width: 10px; height: 10px; border-radius: 3px; background: var(--pulsar-green-base)"></span>
+            <h3 style="font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: .16em; text-transform: uppercase; margin: 0; color: var(--text-body)">Internet &amp; Programática</h3>
+            <span style="flex: 1; height: 1px; background: var(--pulsar-line-dark)"></span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px">
+            <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Card" hover="{{ true }}" padding="{{ 24 }}" dc-props="{{ tile }}" hint-size="100%,104px">
+              <img src="assets/vehicles/sqreem.svg" alt="SQREEM" style="max-width: 68%; max-height: 40px; width: auto; height: auto; object-fit: contain; display: block">
+            </x-import>
+            <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Card" hover="{{ true }}" padding="{{ 24 }}" dc-props="{{ tile }}" hint-size="100%,104px">
+              <img src="assets/vehicles/mgid.svg" alt="MGID" style="max-width: 68%; max-height: 40px; width: auto; height: auto; object-fit: contain; display: block">
+            </x-import>
+            <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Card" hover="{{ true }}" padding="{{ 24 }}" dc-props="{{ tile }}" hint-size="100%,104px">
+              <img src="assets/vehicles/diversa.svg" alt="DIVERSA" style="max-width: 68%; max-height: 40px; width: auto; height: auto; object-fit: contain; display: block">
+            </x-import>
+          </div>
+        </div>
+
+        <div>
+          <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 12px 16px; margin-bottom: 24px">
+            <span style="width: 10px; height: 10px; border-radius: 3px; background: var(--pulsar-cyan)"></span>
+            <h3 style="font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: .16em; text-transform: uppercase; margin: 0; color: var(--text-body)">CTV, Vídeo &amp; Entretenimento Digital</h3>
+            <span style="flex: 1; height: 1px; background: var(--pulsar-line-dark)"></span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px">
+            <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Card" hover="{{ true }}" padding="{{ 24 }}" dc-props="{{ tile }}" hint-size="100%,104px">
+              <img src="assets/vehicles/showheroes.svg" alt="ShowHeroes" style="max-width: 68%; max-height: 40px; width: auto; height: auto; object-fit: contain; display: block">
+            </x-import>
+            <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Card" hover="{{ true }}" padding="{{ 24 }}" dc-props="{{ tile }}" hint-size="100%,104px">
+              <img src="assets/vehicles/podpah.svg" alt="Podpah" style="max-width: 68%; max-height: 40px; width: auto; height: auto; object-fit: contain; display: block">
+            </x-import>
+          </div>
+        </div>
+
+        <div>
+          <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 12px 16px; margin-bottom: 24px">
+            <span style="width: 10px; height: 10px; border-radius: 3px; background: var(--pulsar-amber)"></span>
+            <h3 style="font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: .16em; text-transform: uppercase; margin: 0; color: var(--text-body)">OOH &amp; DOOH</h3>
+            <span style="flex: 1; height: 1px; background: var(--pulsar-line-dark)"></span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px">
+            <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Card" hover="{{ true }}" padding="{{ 24 }}" dc-props="{{ tile }}" hint-size="100%,104px">
+              <img src="assets/vehicles/comunidade-ooh.svg" alt="Comunidade OOH" style="max-width: 68%; max-height: 40px; width: auto; height: auto; object-fit: contain; display: block">
+            </x-import>
+            <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Card" hover="{{ true }}" padding="{{ 24 }}" dc-props="{{ tile }}" hint-size="100%,104px">
+              <img src="assets/vehicles/vamooh.svg" alt="VAMOOH!" style="max-width: 68%; max-height: 40px; width: auto; height: auto; object-fit: contain; display: block">
+            </x-import>
+            <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Card" hover="{{ true }}" padding="{{ 24 }}" dc-props="{{ tile }}" hint-size="100%,104px">
+              <img src="assets/vehicles/livooh.svg" alt="LIVOOH" style="max-width: 68%; max-height: 40px; width: auto; height: auto; object-fit: contain; display: block">
+            </x-import>
+          </div>
+        </div>
+
+        <div>
+          <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 12px 16px; margin-bottom: 24px">
+            <span style="width: 10px; height: 10px; border-radius: 3px; background: var(--pulsar-periwinkle)"></span>
+            <h3 style="font-family: var(--font-display); font-weight: 600; font-size: 14px; letter-spacing: .16em; text-transform: uppercase; margin: 0; color: var(--text-body)">Influência &amp; Produção</h3>
+            <span style="flex: 1; height: 1px; background: var(--pulsar-line-dark)"></span>
+          </div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; max-width: 282px">
+            <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Card" hover="{{ true }}" padding="{{ 24 }}" dc-props="{{ tile }}" hint-size="100%,104px">
+              <img src="assets/vehicles/allfluence.svg" alt="Allfluence" style="max-width: 68%; max-height: 40px; width: auto; height: auto; object-fit: contain; display: block">
+            </x-import>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section style="background: var(--pulsar-petrol)">
+    <div style="max-width: 1180px; margin: 0 auto; padding: 0 clamp(20px, 4vw, 44px) clamp(56px, 8vw, 88px)">
+      <div style="position: relative; overflow: hidden; border-radius: 16px; border: 1px solid var(--pulsar-line-dark); height: clamp(240px, 32vw, 420px)">
+        <img src="assets/imagery/lambe-lambe.jpg" alt="Cartazes da Pulsar Media aplicados em muro urbano" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 42% center">
+      </div>
+    </div>
+  </section>
+
+  <section id="contato" style="background: var(--pulsar-navy-900); border-top: 1px solid var(--pulsar-line-dark)">
+    <div style="max-width: 1180px; margin: 0 auto; padding: clamp(64px, 9vw, 96px) clamp(20px, 4vw, 44px) clamp(72px, 10vw, 104px)">
+      <div style="position: relative; overflow: hidden; border-radius: 18px; background: var(--pulsar-petrol); border: 1px solid color-mix(in srgb, var(--pulsar-green) 34%, transparent); box-shadow: 0 24px 70px -30px color-mix(in srgb, var(--pulsar-green) 40%, transparent); padding: clamp(32px, 5vw, 64px) clamp(22px, 5vw, 64px)">
+        <div style="position: absolute; right: -70px; top: -60px; height: clamp(240px, 40vw, 400px); aspect-ratio: 240 / 290; background-image: {{ markBg }}; background-repeat: no-repeat; background-size: contain; background-position: center; opacity: .16; pointer-events: none"></div>
+        <div style="position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: clamp(36px, 5vw, 56px); align-items: start">
+          <div>
+            <div style="font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--pulsar-green); margin-bottom: 18px">Contato</div>
+            <h2 style="font-family: var(--font-display); font-weight: 700; font-size: clamp(34px, 3.8vw, 48px); line-height: 1.02; letter-spacing: -.025em; text-transform: uppercase; color: var(--pulsar-white); margin: 0 0 20px">Vamos conversar</h2>
+            <p style="font-size: 18px; line-height: 1.65; color: var(--text-body); margin: 0 0 28px; max-width: 440px">Estamos abertos a agências, anunciantes, instituições e veículos. Escreva para o nosso time.</p>
+            <a href="{{ mailto }}" style="font-size: 16px; color: var(--text-muted); border-bottom: 1px solid var(--pulsar-line-dark); padding-bottom: 2px" style-hover="color: var(--pulsar-green); border-color: var(--pulsar-green)">contato@pulsarmedia.com.br</a>
+          </div>
+
+          <div style="background: var(--pulsar-navy-800); border: 1px solid var(--pulsar-line-dark); border-radius: 14px; padding: clamp(22px, 4vw, 30px)">
+            <sc-if value="{{ showForm }}" hint-placeholder-val="{{ true }}">
+              <form onSubmit="{{ submit }}" style="display: flex; flex-direction: column; gap: 16px">
+                <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Input" label="Nome" name="nome" placeholder="Seu nome" required="{{ true }}" hint-size="100%,74px"></x-import>
+                <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Input" label="E-mail" name="email" type="email" placeholder="nome@empresa.com.br" required="{{ true }}" hint-size="100%,74px"></x-import>
+                <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Input" label="Empresa (opcional)" name="empresa" placeholder="Agência, anunciante ou veículo" hint-size="100%,74px"></x-import>
+                <div style="display: flex; flex-direction: column; gap: 7px">
+                  <label for="in-mensagem" style="font-size: 13px; font-weight: 600; color: var(--text-muted)">Mensagem</label>
+                  <textarea id="in-mensagem" name="mensagem" rows="4" required="required" placeholder="Como podemos ajudar?" style="padding: 12px 14px; background: var(--surface-card); border: 1px solid var(--border-subtle); border-radius: var(--radius-md); font-family: var(--font-body); font-size: 15px; line-height: 1.55; color: var(--text-body); outline: none; resize: vertical; min-height: 100px" style-focus="border-color: var(--pulsar-green); box-shadow: 0 0 0 3px color-mix(in srgb, var(--pulsar-green) 22%, transparent)"></textarea>
+                </div>
+                <div style="margin-top: 4px">
+                  <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Button" variant="signature" size="lg" type="submit" full-width="{{ true }}" disabled="{{ sending }}" hint-size="100%,52px">Enviar mensagem</x-import>
+                </div>
+                <p style="font-size: 12px; line-height: 1.55; color: var(--text-faint); margin: 0">Seus dados são usados apenas para o contato comercial da Pulsar Media, conforme a LGPD.</p>
+                <sc-if value="{{ failed }}" hint-placeholder-val="{{ false }}">
+                  <p style="font-size: 13px; line-height: 1.55; color: var(--pulsar-amber); margin: 0">Não conseguimos enviar agora. Tente novamente ou escreva para <a href="{{ mailto }}">contato@pulsarmedia.com.br</a>.</p>
+                </sc-if>
+              </form>
+            </sc-if>
+            <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+              <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px 0 8px">
+                <span style="width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; background: color-mix(in srgb, var(--pulsar-green) 14%, transparent); border: 1px solid color-mix(in srgb, var(--pulsar-green) 34%, transparent)">
+                  <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Icon" name="check" size="{{ 24 }}" color="var(--pulsar-green)" hint-size="24px,24px"></x-import>
+                </span>
+                <h3 style="font-family: var(--font-display); font-weight: 600; font-size: 22px; margin: 0; color: var(--pulsar-white)">Mensagem enviada</h3>
+                <p style="font-size: 15px; line-height: 1.6; color: var(--text-muted); margin: 0">Obrigado pelo contato. Nosso time comercial responde em breve.</p>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="{{ bandClass }}" style="position: relative; overflow: hidden">
+    <img src="assets/imagery/sound-wave.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .3; mix-blend-mode: screen">
+    <div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,28,44,.35), rgba(12,28,44,.05))"></div>
+    <div style="position: relative; max-width: 1180px; margin: 0 auto; padding: clamp(64px, 9vw, 96px) clamp(20px, 4vw, 44px); display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: clamp(28px, 4vw, 56px); align-items: end">
+      <div style="font-family: var(--font-display); font-weight: 700; font-size: clamp(56px, 9vw, 124px); line-height: .92; letter-spacing: -.03em; color: var(--text-strong)">ritmo <span style="color: var(--accent)">≠</span> ruído</div>
+      <p style="font-size: 18px; line-height: 1.65; color: var(--text-body); margin: 0 0 12px">Mídia é ritmo, não ruído. Escolhemos os veículos, os formatos e o momento — para que a mensagem apareça onde faz diferença.</p>
+    </div>
+  </section>
+
+  <footer style="background: var(--pulsar-petrol); border-top: 1px solid var(--pulsar-line-dark)">
+    <div style="max-width: 1180px; margin: 0 auto; padding: clamp(44px, 7vw, 64px) clamp(20px, 4vw, 44px) clamp(28px, 4vw, 36px)">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: clamp(28px, 4vw, 48px)">
+        <div style="display: flex; flex-direction: column; gap: 18px">
+          <x-import component-from-global-scope="PulsarMediaDesignSystem_2a6ee6.Logo" variant="lockup" color="{{ markColor }}" wordmark-color="white" symbol-src="assets" height="{{ 26 }}" hint-size="160px,26px"></x-import>
+          <span style="font-family: var(--font-display); font-weight: 600; font-size: 16px; letter-spacing: -.01em; color: var(--text-body)">Inteligência. Mídia. Presença.</span>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: 8px; font-size: 14px; line-height: 1.6">
+          <a href="{{ mailto }}" style="color: var(--text-body)" style-hover="color: var(--pulsar-green)">contato@pulsarmedia.com.br</a>
+          <span style="color: var(--text-faint)">Brasília — DF</span>
+        </div>
+      </div>
+      <div style="margin-top: clamp(32px, 5vw, 48px); padding-top: 22px; border-top: 1px solid var(--pulsar-line-dark); display: flex; flex-wrap: wrap; gap: 12px 24px; color: var(--text-faint); font-size: 12px; letter-spacing: .04em">
+        <span style="white-space: nowrap">© {{ year }} Pulsar Media</span>
+        <span style="margin-left: auto; white-space: nowrap">Representação comercial de mídia</span>
+      </div>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;accentColor&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;aleatório&quot;,&quot;verde&quot;,&quot;cyan&quot;,&quot;amarelo&quot;,&quot;ambar&quot;],&quot;default&quot;:&quot;aleatório&quot;,&quot;tsType&quot;:&quot;'aleatório' | 'verde' | 'cyan' | 'amarelo' | 'ambar'&quot;,&quot;section&quot;:&quot;Marca&quot;},&quot;heroTexture&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;fibra&quot;,&quot;malha&quot;,&quot;onda&quot;],&quot;default&quot;:&quot;fibra&quot;,&quot;tsType&quot;:&quot;'fibra' | 'malha' | 'onda'&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;bandTone&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;violeta&quot;,&quot;royal&quot;,&quot;petrol&quot;],&quot;default&quot;:&quot;violeta&quot;,&quot;tsType&quot;:&quot;'violeta' | 'royal' | 'petrol'&quot;,&quot;section&quot;:&quot;Faixa ritmo ≠ ruído&quot;}}">
+class Component extends DCLogic {
+  // A cor de assinatura é escolhida pelo script do <helmet> (antes da pintura).
+  // Aqui só respeitamos o override do painel de Tweaks.
+  state = { status: "idle", sound: false };
+  videoRef = React.createRef();
+
+  toggleSound = () => {
+    const el = this.videoRef.current;
+    const next = !this.state.sound;
+    this.setState({ sound: next });
+    if (el) {
+      el.muted = !next;
+      // O clique é um gesto do usuário: aproveita para garantir o play com som.
+      if (next) el.play().catch(() => {});
+    }
+  };
+
+  observeVideo() {
+    const el = this.videoRef.current;
+    if (!el || this._videoObserver) return;
+    this._videoObserver = new IntersectionObserver(
+      (entries) => entries.forEach((e) => (e.isIntersecting ? el.play().catch(() => {}) : el.pause())),
+      { threshold: 0.4 }
+    );
+    this._videoObserver.observe(el);
+  }
+
+  accentName() {
+    const fixed = this.props.accentColor;
+    const acc = window.PulsarAccent;
+    if (fixed && fixed !== "aleatório" && acc && acc.names.includes(fixed)) return fixed;
+    return (acc && acc.current) || "verde";
+  }
+
+  syncAccent() {
+    const fixed = this.props.accentColor;
+    if (window.PulsarAccent && fixed && fixed !== "aleatório") window.PulsarAccent.apply(fixed);
+  }
+
+  componentDidMount() {
+    this.syncAccent();
+    this.observeVideo();
+  }
+
+  componentWillUnmount() {
+    if (this._videoObserver) this._videoObserver.disconnect();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.accentColor !== this.props.accentColor) this.syncAccent();
+  }
+
+  submit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    data.append("_subject", "Contato pelo site — Pulsar Media");
+    data.append("_captcha", "false");
+    data.append("_template", "table");
+    this.setState({ status: "sending" });
+    fetch("https://formsubmit.co/ajax/contato@pulsarmedia.com.br", {
+      method: "POST",
+      headers: { Accept: "application/json" },
+      body: data,
+    })
+      .then((r) => { if (!r.ok) throw new Error("falha"); return r.json(); })
+      .then(() => this.setState({ status: "sent" }))
+      .catch(() => this.setState({ status: "error" }));
+  };
+
+  renderVals() {
+    const MAIL = "contato@pulsarmedia.com.br";
+    const st = this.state.status;
+    const tone = this.props.bandTone ?? "violeta";
+    const texture = this.props.heroTexture ?? "fibra";
+    return {
+      mailto: `mailto:${MAIL}?subject=Contato%20Pulsar%20Media`,
+      email_publico: MAIL,
+      videoRef: this.videoRef,
+      soundOff: !this.state.sound,
+      toggleSound: this.toggleSound,
+      soundIcon: this.state.sound ? "volume-2" : "volume-x",
+      soundLabel: this.state.sound ? "Som ligado" : "Ativar som",
+      markColor: "green",
+      markBg: `url(assets/${{
+        verde: "pulsar-symbol-green.svg",
+        cyan: "pulsar-symbol-cyan.svg",
+        amarelo: "pulsar-symbol-yellow.svg",
+        ambar: "pulsar-symbol-amber.svg",
+      }[window.PulsarAccent && window.PulsarAccent.current] || "pulsar-symbol-green.svg"})`,
+      submit: this.submit,
+      sending: st === "sending",
+      sent: st === "sent",
+      failed: st === "error",
+      showForm: st !== "sent",
+      year: new Date().getFullYear(),
+      tile: { style: { height: 104, display: "flex", alignItems: "center", justifyContent: "center" } },
+      bandClass: {
+        violeta: "pulsar-violet-block",
+        royal: "pulsar-royal-block",
+        petrol: "pulsar-invert",
+      }[tone] || "pulsar-violet-block",
+      heroAltImage: texture === "malha" ? "url(assets/imagery/neural-mesh.jpg)"
+        : texture === "onda" ? "url(assets/imagery/sound-wave.jpg)" : null,
+    };
+  }
+}
+
+</script>
+</body>
+</html>

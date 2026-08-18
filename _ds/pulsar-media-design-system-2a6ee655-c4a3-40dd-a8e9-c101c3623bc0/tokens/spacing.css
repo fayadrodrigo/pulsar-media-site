@@ -1,0 +1,52 @@
+/* Pulsar Media — Spacing, radius, shadow, layout tokens
+   Spacing on an 8px rhythm. Radii are subtle (4–8px) — the symbol already
+   carries the brand's organic curve, so UI stays restrained. */
+
+:root {
+  /* ---- Spacing (8px base) ---- */
+  --space-0:  0;
+  --space-1:  8px;
+  --space-2:  16px;
+  --space-3:  24px;
+  --space-4:  32px;
+  --space-5:  40px;
+  --space-6:  48px;
+  --space-8:  64px;
+  --space-10: 80px;
+  --space-12: 96px;
+  --space-16: 128px;
+
+  /* fine steps for dense UI */
+  --space-half:    4px;
+  --space-quarter: 2px;
+
+  /* ---- Radius ---- */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg:  12px;
+  --radius-xl:  16px;
+  --radius-pill: 999px;
+
+  /* ---- Borders ---- */
+  --border-hairline: 1px; /* @kind other */
+  --border-strong:   2px; /* @kind other */
+
+  /* ---- Shadows (light-first; used sparingly — the brand prefers flat poster blocks) ---- */
+  --shadow-sm:  0 1px 2px rgba(12, 36, 82, 0.08);
+  --shadow-md:  0 10px 30px -12px rgba(12, 36, 82, 0.18);
+  --shadow-lg:  0 24px 60px -20px rgba(12, 36, 82, 0.22);
+  --shadow-glow-green: 0 0 0 1px rgba(81,242,138,0.45), 0 12px 40px -12px rgba(81,242,138,0.5);
+
+  /* ---- Layout ---- */
+  --container-max: 1200px; /* @kind other */
+  --container-narrow: 760px; /* @kind other */
+  --grid-cols: 12; /* @kind other */
+  --grid-gutter: var(--space-3); /* @kind other */
+
+  /* ---- Motion ---- */
+  --ease-standard: cubic-bezier(0.22, 0.61, 0.36, 1); /* @kind other */
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1); /* @kind other */
+  --dur-fast:   140ms; /* @kind other */
+  --dur-base:   240ms; /* @kind other */
+  --dur-slow:   420ms; /* @kind other */
+}

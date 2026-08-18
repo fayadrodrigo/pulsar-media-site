@@ -1,0 +1,29 @@
+# Configuração do deploy da Pulsar Media no Netlify.
+# Site estático: publica a raiz do repositório, sem build step.
+
+[build]
+  publish = "."
+
+# Cabeçalhos de segurança aplicados a todas as páginas.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Impede que o site seja embutido em iframes de terceiros (clickjacking).
+    X-Frame-Options = "DENY"
+    # Impede o navegador de "adivinhar" tipos de arquivo (MIME sniffing).
+    X-Content-Type-Options = "nosniff"
+    # Não vaza a URL completa para sites externos.
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # O site não usa câmera, microfone nem geolocalização.
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+
+# Cache longo para assets versionados (imagens, vídeo, design system).
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"
+
+[[headers]]
+  for = "/_ds/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800"

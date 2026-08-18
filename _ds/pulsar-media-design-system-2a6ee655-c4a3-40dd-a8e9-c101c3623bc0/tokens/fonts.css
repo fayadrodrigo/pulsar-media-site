@@ -1,0 +1,9 @@
+/* Pulsar Media — Webfonts
+   Wordmark & impact titles: a geometric grotesk (bold, uppercase, slightly open
+   tracking). The brand's own tokens name Poppins as the safe web equivalent —
+   used here for display. Body / UI: Inter.
+   NOTE (substitution): the exact display face from the brand presentation was not
+   supplied as font files. Poppins is the brand-sanctioned web equivalent. Swap in
+   the licensed face (Aeonik / Sofia Pro / TT Commons) for production if available. */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap');

@@ -1,0 +1,74 @@
+/* Pulsar Media — Base element styling & a few brand utilities.
+   Deliberately light: components own their look; this sets sensible
+   defaults so bare specimen/card HTML picks up the brand immediately. */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: var(--lh-normal);
+  color: var(--text-body);
+  background: var(--bg-page);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  line-height: var(--lh-snug);
+  margin: 0 0 var(--space-2);
+  font-weight: var(--fw-bold);
+}
+h1 { font-size: var(--fs-h1); letter-spacing: var(--ls-tight); }
+h2 { font-size: var(--fs-h2); }
+h3 { font-size: var(--fs-h3); font-weight: var(--fw-semibold); }
+h4 { font-size: var(--fs-h4); font-weight: var(--fw-semibold); }
+
+p { margin: 0 0 var(--space-2); text-wrap: pretty; }
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hover); text-decoration: underline; text-underline-offset: 2px; }
+
+/* ---- Brand utilities ---- */
+
+/* Uppercase eyebrow / label — muted navy, tracked out (deck style) */
+.pulsar-eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--fs-label);
+  font-weight: var(--fw-semibold);
+  letter-spacing: var(--ls-wider);
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.pulsar-eyebrow--accent { color: var(--primary); }
+
+/* The recurring thin vertical rule that separates symbol from text */
+.pulsar-rule {
+  width: var(--border-hairline);
+  align-self: stretch;
+  background: var(--border-subtle);
+}
+
+/* Display statement helper */
+.pulsar-display {
+  font-family: var(--font-display);
+  font-weight: var(--fw-bold);
+  font-size: var(--fs-display-lg);
+  line-height: var(--lh-tight);
+  letter-spacing: var(--ls-tight);
+  color: var(--text-strong);
+}
+
+/* Solid poster color block */
+.pulsar-block {
+  border-radius: var(--radius-md);
+  padding: var(--space-4);
+}
+
+/* Green signature keyline — the thin bar/rule that marks a hero moment */
+.pulsar-keyline {
+  background: var(--accent);
+  border-radius: var(--radius-pill);
+}
