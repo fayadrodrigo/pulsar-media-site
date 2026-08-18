@@ -17,13 +17,6 @@
     # O site não usa câmera, microfone nem geolocalização.
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
 
-# Cache longo para assets versionados (imagens, vídeo, design system).
-[[headers]]
-  for = "/assets/*"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
-
-[[headers]]
-  for = "/_ds/*"
-  [headers.values]
-    Cache-Control = "public, max-age=604800"
+# Cache: fica o padrão do Netlify (revalidação por ETag a cada visita).
+# Não usar max-age longo aqui — os arquivos não têm hash no nome, então um
+# cache longo faria navegadores segurarem versões antigas após um deploy.
