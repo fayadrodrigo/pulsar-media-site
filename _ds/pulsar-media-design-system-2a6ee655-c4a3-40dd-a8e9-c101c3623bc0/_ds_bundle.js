@@ -329,12 +329,19 @@ function Icon({
 }) {
   const ref = React.useRef(null);
   React.useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    // Lucide REPLACES the <i data-lucide> placeholder with an <svg>. That node
+    // must not be React-owned, or React throws "removeChild … is not a child"
+    // on the next re-render — so the placeholder lives inside this wrapper,
+    // injected via innerHTML where the reconciler never looks.
+    el.innerHTML = '<i data-lucide="' + String(name).replace(/[^a-z0-9-]/gi, '') + '" style="display:inline-flex;width:100%;height:100%"></i>';
     const draw = () => {
-      if (window.lucide && ref.current) {
+      if (window.lucide && el.isConnected) {
         try {
           window.lucide.createIcons({
             nameAttr: 'data-lucide',
-            root: ref.current.parentNode
+            root: el
           });
         } catch (e) {}
       }
@@ -345,7 +352,6 @@ function Icon({
   }, [name]);
   return /*#__PURE__*/React.createElement("i", _extends({
     ref: ref,
-    "data-lucide": name,
     style: {
       display: 'inline-flex',
       width: size,
